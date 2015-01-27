@@ -1,0 +1,26 @@
+
+AddHandler application/x-httpd-php5 .php .html .htm 
+AddType application/x-httpd-php5 .html .htm
+
+
+AddType video/mp4  mp4 m4v
+AddType audio/mp4  m4a
+AddType video/ogg  ogv
+AddType audio/ogg  ogg oga
+AddType video/webm webm
+
+
+RewriteEngine On
+
+
+#RewriteRule ^project-([a-zA-Z0-9_-]+)$ index.php?view=project&id=$1 [NC]
+RewriteRule ^resume$ index.php?view=resume [NC]
+RewriteRule ^portfolio$ index.php?view=portfolio [NC]
+RewriteRule ^about$ index.php?view=about [NC]
+
+
+RewriteRule ^image-([a-zA-Z0-9_-]+)$ index.php?view=image&code=$1 [NC]
+RewriteRule ^([a-zA-Z0-9_-]+)-galery$ index.php?view=galery&name=$1 [NC]
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?view=project&name=$1 [NC]
+
+

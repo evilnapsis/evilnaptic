@@ -1,0 +1,9 @@
+[19-Nov-2014 18:42:53 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/core/controller/Model.php on line 27
+[19-Nov-2014 18:43:56 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/core/controller/Model.php on line 27
+[19-Nov-2014 18:43:58 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/core/controller/Model.php on line 27
+[19-Nov-2014 18:44:21 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/core/controller/Model.php on line 27
+[19-Nov-2014 18:44:38 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/login.php on line 17
+[24-Nov-2014 04:04:39 America/Chicago] PHP Warning:  mysqli::mysqli(): (HY000/2002): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) in /home/evilnaps/public_html/core/controller/Database.php on line 12
+[24-Nov-2014 04:04:39 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/evilnaps/public_html/core/controller/Executor.php on line 7
+[24-Nov-2014 04:04:39 America/Chicago] PHP Warning:  Executor::doit(): Couldn't fetch mysqli in /home/evilnaps/public_html/core/controller/Executor.php on line 7
+[24-Nov-2014 04:04:39 America/Chicago] PHP Fatal error:  Call to a member function fetch_array() on a non-object in /home/evilnaps/public_html/core/controller/Model.php on line 27
