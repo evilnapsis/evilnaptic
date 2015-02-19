@@ -59,6 +59,7 @@ insert into kind2 (name) value ("Tema");
 
 create table course (
 	id int not null auto_increment primary key,
+	code varchar(200) ,
 	name varchar(200) not null,
 	description varchar(1000) not null,
 	image varchar(255),	
@@ -89,6 +90,7 @@ create table topic (
 
 create table lecture (
 	id int not null auto_increment primary key,
+	code varchar(200) ,
 	title varchar(200) not null,
 	content text not null,
 	is_public boolean not null default 0,
@@ -161,6 +163,11 @@ insert into cat (name,preffix,icon) value ("Ingenieria","ingenieria","fa fa-code
 insert into cat (name,preffix,icon) value ("Espacio","espacio","fa fa-rocket");
 insert into cat (name,preffix,icon) value ("Personal","personal","fa fa-male");
 
+
+insert into cat (name,preffix,icon) value ("Desarrollo Web","desarrollo-web","");
+insert into cat (name,preffix,icon) value ("Tecnologia Microsoft","tecnologia-microsoft","");
+
+
 create table kind (
 	id int not null auto_increment primary key,
 	name varchar(200) not null,
@@ -173,22 +180,39 @@ insert into kind (name) value ("Tip");
 insert into kind (name) value ("Noticia");
 insert into kind (name) value ("Nota");
 
+create table display_img (
+	id int not null auto_increment primary key,
+	name varchar(200) not null,
+	preffix varchar(200) not null
+);
+
+
+insert into display_img (name) value ("Arriba");
+insert into display_img (name) value ("Abajo");
+insert into display_img (name) value ("Izquierda");
+insert into display_img (name) value ("Derecha");
+
 
 create table post (
 	id int not null auto_increment primary key,
+	code varchar(200) ,
 	title varchar(200) not null,
 	brief varchar(500) not null,
 	content text not null,
 	image varchar(255) not null,
+	video varchar(255) not null,
 	is_public boolean not null default 0,
+	show_image boolean not null default 0,
 	is_principal boolean not null default 0,
 	is_sidebar boolean not null default 0,
 	created_at datetime not null,
 	cat_id int not null,
 	user_id int not null,
 	kind_id int not null,
+	display_img_id int,
 	foreign key(kind_id) references kind(id),
 	foreign key(user_id) references user(id),
+	foreign key(display_img_id) references display_img(id),
 	foreign key(cat_id) references cat(id)
 );
 
@@ -235,3 +259,62 @@ create table post_tag (
 	foreign key (post_id) references post(id)	
 );
 
+/** **/
+
+create table slide (
+	id int not null auto_increment primary key,
+	title varchar(200) not null,
+	title_link varchar(200) not null,
+	subtitle varchar(200) not null,
+	subtitle_link varchar(200) not null,
+	image varchar(255),	
+	video varchar(255),	
+	button_class varchar(200) not null,
+	button_text varchar(200) not null,
+	button_link varchar(200) not null,
+	is_public boolean not null default 0,
+	link varchar(200) not null,
+	position int not null,
+	created_at datetime not null
+);
+
+create table post_view(
+	id int not null auto_increment primary key,
+	viewer_id int,
+	post_id int null,
+	created_at datetime not null,
+	realip varchar(16) not null,
+	foreign key (viewer_id) references user(id),
+	foreign key (post_id) references post(id)
+);
+
+
+create table status (
+	id int not null auto_increment primary key,
+	code varchar(200) ,
+	brief varchar(500) not null,
+	image varchar(255) not null,
+	video varchar(255) not null,
+	is_public boolean not null default 0,
+	user_id int not null,
+	foreign key(user_id) references user(id)
+);
+
+
+/** Comments System**/
+
+create table comment (
+	id int not null auto_increment primary key,
+	entry_id int ,
+	ref_id varchar(500) not null,
+	name varchar(50) not null,
+	email varchar(255) not null,
+	comment text not null,
+	status int not null,
+	comment_id int,
+	created_at datetime not null,
+	is_readed boolean not null default 0,
+	foreign key(comment_id) references comment(id)
+);
+
+	

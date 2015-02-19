@@ -30,5 +30,9 @@ include "controller/Lb.php";
 
 
 include "controller/class.upload.php";
+include "controller/IpLogger.php";
+
+include "controller/Viewer.php";
+include "controller/captcha.php";
 
 ?>

@@ -1,113 +1,101 @@
-<?php
-// print_r($_SERVER["PHP_SELF"]);
-// print_r($_SESSION);
-$posts = PostData::getPostPrincipals();
-$tips = PostData::getTipPrincipals();
-$topics = CourseData::getTopicPrincipals();
-$howtos = CourseData::getHowToPrincipals();
-$courses = CourseData::getCoursePrincipals();
-$lectures = LectureData::get10Publics();
+<?php 
+
+$posts = PostData::getPostPrincipals2();
+$npost = count($posts);
+if($npost%2==0){
+  // numero de posts par
+  $l1 = $npost/2;
+  $l2 = $npost/2;
+}else{
+  // impar
+  $hpost = floor($npost/2);
+  $l1 = $hpost+1;
+  $l2 = $hpost;
+}
 
 ?>
-<div style="background:url(imgs/header.jpg) center ; background-size:cover;margin-top:-21px;">
-<br><div class="container"><br>
-  <div class="row">
-    <div class="col-md-12">
-    <h2>Evilnapsis HomePage</h2>
-    <p>I <i class="fa fa-heart"></i> Build stuffs.</p>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - -->
+<br><div class="container">
+    <div class="row">
+            <div class="col-md-12">
+<center>           <br>
+<img src="imgs/yo.png" style="width:180px;"  class="img-circle img-thumbnail">
+<br> <h1 align="center" style="font-size:35px;font-weight:bold;width:70%;" class="text-primary">I AM EVILNɅPSIS</h1></center>   
+            <p class="lead" align="center">Freelance, Web Developer, Geek, Father.</p>
+ <center>
+ <a href="https://mx.linkedin.com/in/evilnapsis" class="btn btn-default"><i class="fa fa-linkedin"></i></a> 
+ <a href="https://github.com/evilnapsis" class="btn btn-default"><i class="fa fa-github"></i></a> 
+<!-- <a href="https://behance.com/evilnapsis" class="btn btn-default"><i class="fa fa-behance-alt"></i></a>  -->
+ <a href="https://youtube.com/evilnapsis" class="btn btn-default"><i class="fa fa-youtube-play"></i></a> 
+ <a href="https://twitter.com/evilnapsis" class="btn btn-default"><i class="fa fa-twitter"></i></a> 
+ <a href="https://facebook.com/iamevilnapsis" class="btn btn-default"><i class="fa fa-facebook"></i></a> 
+ <a href="./resume" class="btn btn-default"><i class="fa fa-file-o"></i></a></center>
+            <br><br><br><hr>
+            </div>
     </div>
-</div><br>
-</div>
-<br></div>
-<br>
-<div class="container">
-	<div class="row">
-		<div class="col-md-2">
-<?php foreach($tips as $post):?>
-<h3><a class="post-title" href="./index.php?view=post&id=<?php echo $post->id; ?>&kid=<?php echo $post->kind_id; ?>"><?php echo $post->title; ?></a></h3>
-<?php echo $post->brief; ?>
-<?php endforeach; ?>
+        <div class="row">
 
-		</div>
-		<div class="col-md-6">
-<?php foreach($posts as $post):?>
+            <div class="col-md-10 col-md-offset-1">
+<center>         <h1 align="center" style="font-size:35px;font-weight:bold;width:70%;" class="text-primary">Articulos Recientes</h1></center>   
+<br>
+
+    <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+<?php $cnt=0;?>
+            <div class="col-md-6">
+<?php for($i=0;$i<$l1;$i++):
+$p = $posts[$cnt];
+?>
 <div class="row">
-<?php if($post->image!=""):?>
+<?php if($p->image!="" && file_exists("storage/images/$p->image")):?>
 <div class="col-md-3">
 
-    <img src="<?php echo "storage/images/$post->image";?>" class="img-responsive"/>
+    <img src="<?php echo "storage/images/$p->image";?>" class="img-responsive"/>
 
 </div>
 <?php endif; ?>
-<div class="<?php if($post->image!=""){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
-<h3 ><a class="post-title" href="./index.php?view=post&id=<?php echo $post->id; ?>&kid=<?php echo $post->kind_id; ?>&t=<?php echo strtolower( str_replace(" ", "-", $post->title) ); ?>"><?php echo $post->title; ?></a></h3>
-<?php echo $post->brief; ?>
+<div class="<?php if($post->image!="" && file_exists("storage/images/$p->image")){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
+            <h4><a href="./p-<?php echo $p->code;?>"><?php echo $p->title;?></a></h4>
+            <p class="text-muted"><?php echo date("d/M/Y",strtotime($p->created_at));?> - <a href="javascript:void()"><?php echo $p->getCat()->name;?></a> </p>
 </div>
 </div>
-<hr style="">
-<?php endforeach; ?>
-
-		</div>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<div class="col-md-4">
-    <!-- - - - - - -->
-<?php foreach($lectures as $post):?>
-<h3 ><a class="post-title" href="./index.php?view=openlecture&lecture_id=<?php echo $post->lid; ?>"><?php echo $post->title; ?></a></h3>
-<?php echo  substr($post->content, 0,100); ?>... <a href="./index.php?view=openlecture&lecture_id=<?php echo $post->lid; ?>">Leer mas</a>
-<hr style="">
-<?php endforeach; ?>
-
-    <!-- - - - - - -->
- <div class="panel panel-default"> 
- <div class="panel-heading">Temas, Cursos y Tutoriales</div>
-<div class="panel-body">
-<?php if(count($topics)>0):?>
-<?php foreach($topics as $topic):?>
-    <h4><a class="extra-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h4>
-    <p class="text-muted"><i class="fa fa-th-list"></i> Tema</p>
 <hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<?php if(count($howtos)>0):?>
-<?php foreach($howtos as $topic):?>
-   <h4><a class="extra-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h4>
-
-    <p class="text-muted"><i class="fa fa-th-list"></i> Tutorial</p>
-
-<hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<?php if(count($courses)>0):?>
-<?php foreach($courses as $topic):?>
-   <h4><a class="extra-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h4>
-
-    <p class="text-muted"><i class="fa fa-th-list"></i> Curso</p>
-
-<hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-</div>
-</div>
-
-		</div>
-	</div>
-<!-- The tag section -->
-<div class="row">
-<div class="col-md-12">
-<?php
-$tags = PostTagData::getPrincipals();
+          <?php $cnt++;
+endfor; ?>
+            </div>
+            <div class="col-md-6">
+<?php for($i=0;$i<$l2;$i++):
+$p = $posts[$cnt];
 ?>
-<?php if(count($tags)>0):?>
-<h2 class="sub-title">Etiquetas</h2>
-<?php foreach($tags as $tag): ?>
-  <a href="javascript:void();" class="btn btn-default"><i class="fa fa-tag"></i> <?php echo $tag->name; ?></a>
-<?php endforeach; ?>
+<div class="row">
+<?php if($p->image!="" && file_exists("storage/images/$p->image")):?>
+<div class="col-md-3">
+
+    <img src="<?php echo "storage/images/$p->image";?>" class="img-responsive"/>
+
+</div>
 <?php endif; ?>
+<div class="<?php if($post->image!="" && file_exists("storage/images/$p->image")){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
+            <h4><a href="./p-<?php echo $p->code;?>"><?php echo $p->title;?></a></h4>
+            <p class="text-muted"><?php echo date("d/M/Y",strtotime($p->created_at));?> - <a href="javascript:void()"><?php echo $p->getCat()->name;?></a> </p>
 </div>
 </div>
+<hr>
+          <?php $cnt++;
+endfor; ?>
+
+            </div>
+    </div>
+            </div>
+
+    </div>
+
+
+            </div>
+    </div>
+
+
 </div>
+</div>
+<br><br>

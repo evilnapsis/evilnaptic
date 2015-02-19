@@ -1,7 +1,7 @@
 <?php
 // print_r($_SERVER["PHP_SELF"]);
 // print_r($_SESSION);
-$course = CourseData::getById($_GET["course_id"]);
+$course = CourseData::getByCode($_GET["code"]);
 $topics = TopicData::getPublicsByCourseId($course->id);
 $kind = Kind2Data::getById($course->kind2_id);
 ?>
@@ -62,3 +62,4 @@ $ucs = UserCourseData::getAllByCourseId($course->id);
 		<!-- -->
 	</div>
 </div>
+<br><br>

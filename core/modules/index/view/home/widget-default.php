@@ -8,15 +8,51 @@ $user=UserData::getById($_SESSION["user_id"]);
 	<div class="row">
 		<div class="col-md-3">
 <div class="list-group">
-
-  <a href="index.php?view=newpost" class="list-group-item"><i class="fa fa-plus"></i> Nuevo articulo</a>
-  <a href="index.php?view=newcourse" class="list-group-item"><i class="fa fa-plus"></i> Nuevo curso</a>
+  <a href="index.php?view=newstatus" class="list-group-item"><i class="fa fa-plus"></i> Nuevo Status</a>
+  <a href="index.php?view=newslide" class="list-group-item"><i class="fa fa-plus"></i> Nuevo Slide</a>
   <a href="index.php?view=viewposts" class="list-group-item"><i class="fa fa-th-list"></i> Posts</a>
+  <a href="index.php?view=slides" class="list-group-item"><i class="fa fa-th-list"></i> Slides</a>
   <a href="index.php?view=projects" class="list-group-item"><i class="fa fa-th-large"></i> Proyectos</a>
   <a href="index.php?view=opencourses" class="list-group-item"><i class="fa fa-th-large"></i> Cursos</a>
 </div>
 		</div>
 		<div class="col-md-9">
+
+<div class="panel panel-default">
+<div class="panel-heading">Ultimos 30 dias</div>
+<div class="panel-body">
+	
+	<div id="graph" class="animate" data-animate="fadeInUp"></div>
+
+<script>
+
+<?php 
+echo "var c=0;";
+echo "var dates=Array();";
+echo "var data=Array();";
+echo "var total=Array();";
+for($i=0;$i<30;$i++){
+  echo "dates[c]=\"".date("Y-m-d",time()-60*60*24*$i)."\";";
+  echo "data[c]=\"".Viewer::countAllFromDay(date("Y-m-d",time()-60*60*24*$i))."\";";
+  echo "total[c]={x: dates[c],y: data[c]};";
+  echo "c++;";
+}
+?>
+// Use Morris.Area instead of Morris.Line
+Morris.Area({
+  element: 'graph',
+  data: total,
+  xkey: 'x',
+  ykeys: ['y',],
+  labels: ['Y']
+}).on('click', function(i, row){
+  console.log(i, row);
+});
+</script>
+
+
+</div>
+</div>
 
 		</div>
 		

@@ -12,17 +12,21 @@ $user=UserData::getById($_SESSION["user_id"]);
   <a href="index.php?view=newpost" class="list-group-item"><i class="fa fa-plus"></i> Nuevo articulo</a>
   <a href="index.php?view=viewposts" class="list-group-item"><i class="fa fa-th-list"></i> Posts</a>
   <a href="index.php?view=newcourse" class="list-group-item"><i class="fa fa-plus"></i> Nuevo curso</a>
-  <a href="#" class="list-group-item"><i class="fa fa-comment"></i> Comentarios</a>
+  <a href="./index.php?view=comments" class="list-group-item"><i class="fa fa-comment"></i> Comentarios</a>
   <a href="#" class="list-group-item"><i class="fa fa-star"></i> Calificaciones</a>
   <a href="#" class="list-group-item"><i class="fa fa-bell-o"></i> Notificaciones</a>
 </div>
 		</div>
 		<div class="col-md-9">
 <h3>Lista de Articulos</h3>
+<table class="table table-bordered">
 <?php foreach(PostData::getAll() as $c):?>
-<h3><a href="index.php?view=editpost&post_id=<?php echo $c->id; ?>"><?php if($c->is_public){ echo "<i class='fa fa-check-circle-o tip' title='Publico'></i>"; }?> <?php echo $c->title; ?></a></h3>
-<hr>
+<tr>
+<td><a href="index.php?view=editpost&post_id=<?php echo $c->id; ?>"><?php if($c->is_public){ echo "<i class='fa fa-check-circle-o tip' title='Publico'></i>"; }?> <?php echo $c->title; ?></a></td>
+<td></td>
+</tr>
 <?php endforeach; ?>
+</table>
 		</div>
 		
 	</div>

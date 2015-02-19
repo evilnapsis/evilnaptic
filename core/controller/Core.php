@@ -6,6 +6,7 @@
 // @brief obtiene las configuraciones, muestra y carga los contenidos necesarios.
 
 class Core {
+	public static $post;
 
 	public static function includeCSS(){
 		$path = "res/css/";

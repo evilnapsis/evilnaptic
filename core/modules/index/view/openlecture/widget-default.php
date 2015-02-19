@@ -1,5 +1,5 @@
 <?php
-$lecture = LectureData::getById($_GET["lecture_id"]);
+$lecture = LectureData::getByCode($_GET["code"]);
 $topic = TopicData::getById($lecture->topic_id);
 $course = CourseData::getById($topic->course_id);
 if(!$course->is_open){
@@ -85,7 +85,7 @@ endforeach;?>
   </div>
   <div class="form-group">
     <div class="col-lg-12">
-    <input type="hidden" name="lecture_id" value="<?php echo $_GET["lecture_id"];?>">
+    <input type="hidden" name="lecture_id" value="<?php echo $lecture->id;?>">
       <button type="submit" class="btn btn-block btn-default">Enviar pregunta</button>
     </div>
   </div>
@@ -102,7 +102,7 @@ endforeach;?>
 		<div class="col-md-3">
 <?php if(isset($_SESSION["user_id"])):?>
     <h4>Retroalimentacion</h4>
-<?php $lf = LectureFeedbackData::getByLU($_GET["lecture_id"],$_SESSION["user_id"]);?>
+<?php $lf = LectureFeedbackData::getByLU($lecture->id,$_SESSION["user_id"]);?>
 <?php if($lf==null):?>
     <form class="form-horizontal" role="form" method="post" action="index.php?action=calify">
   <div class="form-group">
@@ -147,7 +147,7 @@ endforeach;?>
   </div>
   <div class="form-group">
     <div class="col-lg-12">
-    <input type="hidden" name="lecture_id" value="<?php echo $_GET["lecture_id"];?>">
+    <input type="hidden" name="lecture_id" value="<?php echo $lecture->id;?>">
       <button type="submit" class="btn btn-block btn-warning"><i class="fa fa-retweet"></i> Retoalimentar</button>
     </div>
   </div>

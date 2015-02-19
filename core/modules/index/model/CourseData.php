@@ -12,9 +12,11 @@ class CourseData {
 		$this->created_at = "NOW()";
 	}
 
+	public function getKind2(){ return Kind2Data::getById($this->kind2_id);}
+
 	public function add(){
-		$sql = "insert into ".self::$tablename." (name,description,category_id,user_id,level_id,kind2_id,created_at) ";
-		$sql .= "value (\"$this->name\",\"$this->description\",\"$this->category_id\",$this->user_id,$this->level_id,$this->kind2_id,$this->created_at)";
+		$sql = "insert into ".self::$tablename." (code,name,description,category_id,user_id,level_id,kind2_id,created_at) ";
+		$sql .= "value (\"$this->code\",\"$this->name\",\"$this->description\",\"$this->category_id\",$this->user_id,$this->level_id,$this->kind2_id,$this->created_at)";
 		return Executor::doit($sql);
 	}
 
@@ -39,6 +41,11 @@ class CourseData {
 		return Model::one($query[0],new CourseData());
 	}
 
+	public static function getByCode($id){
+		$sql = "select * from ".self::$tablename." where code=\"$id\"";
+		$query = Executor::doit($sql);
+		return Model::one($query[0],new CourseData());
+	}
 
 	public function getCategory(){ return CategoryData::getById($this->category_id); }
 	public function getLevel(){ return LevelData::getById($this->level_id); }
@@ -75,6 +82,13 @@ class CourseData {
 		return Model::many($query[0],new CourseData());
 	}
 
+	public static function getPrincipals(){
+		$sql = "select * from ".self::$tablename." where  is_public=1 and is_principal=1 order by created_at desc limit 10";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new CourseData());
+	}
+
+
 	public static function getTopicPrincipals(){
 		$sql = "select * from ".self::$tablename." where kind2_id=4 and is_public=1 and is_principal=1 order by created_at desc";
 		$query = Executor::doit($sql);
@@ -82,7 +96,7 @@ class CourseData {
 	}
 
 	public static function getLike($q){
-		$sql = "select * from ".self::$tablename." where title like '%$q%' or content like '%$q%'";
+		$sql = "select * from ".self::$tablename." where name like '%$q%' or description like '%$q%'";
 		$query = Executor::doit($sql);
 		return Model::many($query[0],new CourseData());
 	}

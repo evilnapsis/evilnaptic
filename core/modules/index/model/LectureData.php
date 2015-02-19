@@ -15,8 +15,8 @@ class LectureData {
 
 	public function getTopic(){ return TopicData::getById($this->topic_id); }
 	public function add(){
-		$sql = "insert into ".self::$tablename." (title,content,is_public,topic_id,created_at) ";
-		$sql .= "value (\"$this->title\",\"$this->content\",$this->is_public,$this->topic_id,$this->created_at)";
+		$sql = "insert into ".self::$tablename." (code,title,content,is_public,topic_id,created_at) ";
+		$sql .= "value (\"$this->code\",\"$this->title\",\"$this->content\",$this->is_public,$this->topic_id,$this->created_at)";
 		return Executor::doit($sql);
 	}
 
@@ -41,6 +41,11 @@ class LectureData {
 		return Model::one($query[0],new LectureData());
 	}
 
+	public static function getByCode($id){
+		$sql = "select * from ".self::$tablename." where code=\"$id\"";
+		$query = Executor::doit($sql);
+		return Model::one($query[0],new LectureData());
+	}
 
 
 	public static function getAll(){
@@ -62,7 +67,7 @@ class LectureData {
 	}
 
 	public static function get10Publics(){
-		$sql = "select *,lecture.id as lid from lecture inner join topic on (topic.id=lecture.topic_id) inner join course on (topic.course_id=course.id) where course.is_open=1 order by lecture.created_at desc";
+		$sql = "select *,lecture.id as lid,lecture.code as code from lecture inner join topic on (topic.id=lecture.topic_id) inner join course on (topic.course_id=course.id) where course.is_open=1 order by lecture.created_at desc";
 		$query = Executor::doit($sql);
 		return Model::many($query[0],new LectureData());
 	}

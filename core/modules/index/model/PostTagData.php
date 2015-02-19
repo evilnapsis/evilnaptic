@@ -67,6 +67,18 @@ echo		$sql = "select * from ".self::$tablename." where post_id=$p and tag_id=$t 
 		return Model::many($query[0],new PostTagData());
 	}
 
+	public static function getAllByPId($pid){
+		$sql = "select *,count(*) as count_tag from post_tag inner join tag on (tag.id=tag_id) where post_id=$pid group by tag_id order by count_tag desc,name";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new PostTagData());
+	}
+
+
+	public static function getLikePrincipals($q){
+		$sql = "select *,count(*) as count_tag from post_tag inner join tag on (tag.id=tag_id) where name like '%$q%' group by tag_id order by count_tag desc,name";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new PostTagData());
+	}
 
 	public static function getAllByPostId($id){
 		$sql = "select * from ".self::$tablename." where post_id=".$id;

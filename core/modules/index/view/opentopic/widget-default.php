@@ -55,7 +55,7 @@ if(UserCourseData::getByUC($_SESSION["user_id"],$course->id)==null){
 
 <tr>
 <td>
-  <a href="index.php?view=openlecture&lecture_id=<?php echo $c->id; ?>">
+  <a href="./l-<?php echo $c->code; ?>">
     <i class="fa fa-file-text"></i> <?php echo $c->title; ?>
   </a>
   </td>

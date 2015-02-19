@@ -16,7 +16,15 @@ RewriteEngine On
 #RewriteRule ^project-([a-zA-Z0-9_-]+)$ index.php?view=project&id=$1 [NC]
 RewriteRule ^resume$ index.php?view=resume [NC]
 RewriteRule ^portfolio$ index.php?view=portfolio [NC]
+RewriteRule ^login$ index.php?view=login [NC]
+RewriteRule ^magazine$ index.php?view=magazine [NC]
 RewriteRule ^about$ index.php?view=about [NC]
+RewriteRule ^status$ index.php?view=status [NC]
+
+RewriteRule ^p-([a-zA-Z0-9_-]+)$ index.php?view=post&code=$1 [NC]
+RewriteRule ^l-([a-zA-Z0-9_-]+)$ index.php?view=openlecture&code=$1 [NC]
+RewriteRule ^x-([a-zA-Z0-9_-]+)$ index.php?view=takecourse&code=$1 [NC]
+RewriteRule ^s-([a-zA-Z0-9_-]+)$ index.php?view=status&code=$1 [NC]
 
 
 RewriteRule ^image-([a-zA-Z0-9_-]+)$ index.php?view=image&code=$1 [NC]

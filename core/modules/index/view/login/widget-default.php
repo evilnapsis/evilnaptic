@@ -1,9 +1,7 @@
-
+<br><br><br><br>
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
-    <h2>Ingresar</h2>
-    <p>Si no estas registrado <a href="index.php?view=register">Registrate AQUI</a></p>
+    <div class="col-md-4">
     </div>
     <div class="col-md-4">
     <div class="panel panel-default">
@@ -42,3 +40,5 @@
   </div>
 
 </div>
+<br><br><br><br>
+<br><br>

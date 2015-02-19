@@ -1,0 +1,255 @@
+  hr{
+    border-color:#f0f0f0;border-style:dashed;
+  }
+
+
+  .top-bar {
+    padding:0;
+    margin: 0;
+    height: 32px;
+  background-color: #fff;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.top-bar.color-bar {
+  border-bottom: 0;
+}
+
+.top-bar.color-bar a {
+  color: rgba(255,255,255,.6);
+}
+
+.top-bar.color-bar a:hover {
+  color: rgba(255,255,255,1) !important;
+}
+
+.top-bar.color-bar ul.social-list li a i {
+  border-left: 1px solid rgba(255,255,255,.1);
+}
+
+.top-bar.color-bar ul.social-list li:last-child a i {
+  border-right: 1px solid rgba(255,255,255,.1);
+}
+
+.top-bar.color-bar .contact-details li a:before {
+  color: rgba(255,255,255,.2);
+}
+
+.top-bar.dark-bar {
+  background-color: #444;
+  border-bottom: 0;
+}
+
+.top-bar.dark-bar a {
+  color: rgba(255,255,255,.4);
+}
+
+.top-bar.dark-bar a:hover {
+  color: rgba(255,255,255,1) !important;
+}
+
+.top-bar.dark-bar ul.social-list li a i {
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+
+.top-bar.dark-bar ul.social-list li:last-child a i {
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+
+.top-bar.dark-bar .contact-details li a:before {
+  color: rgba(255,255,255,.2);
+}
+
+.top-bar a {
+  color: #aaa;
+}
+
+.top-bar .contact-details li {
+  display: inline-block;
+}
+
+.top-bar .contact-details li a:before {
+  position: relative;
+  content: "|";
+  font-size: 13px;
+  margin: 0 3px;
+  top: -1px;
+  color: #ddd;
+}
+
+.top-bar .contact-details li a:before {
+  color: #aaa;
+}
+
+.top-bar .contact-details li:first-child a:before {
+  display: none;
+}
+
+.top-bar .contact-details li a {
+  font-size: 12px;
+  display: block;
+  line-height: 32px;
+}
+
+ul.social-list {
+    float: right;
+}
+
+ul.social-list li {
+    float: left;
+}
+
+ul.social-list li a {
+    display: inline-block;
+  transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
+
+ul.social-list li a:hover {
+  color: #fff;
+}
+
+ul.social-list li a.facebook:hover {
+  background-color: #507CBE;
+}
+
+ul.social-list li a.twitter:hover {
+  background-color: #63CDF1;
+}
+
+ul.social-list li a.google:hover {
+  background-color: #F16261;
+}
+
+ul.social-list li a.dribbble:hover {
+  background-color: #E46387;
+}
+
+ul.social-list li a.linkdin:hover {
+  background-color: #90CADD;
+}
+
+ul.social-list li a.tumblr:hover {
+  background-color: #4D7EA3;
+}
+
+ul.social-list li a.flickr:hover {
+  background-color: #E474AF;
+}
+
+ul.social-list li a.instgram:hover {
+  background-color: #4D4F54;
+}
+
+ul.social-list li a.vimeo:hover {
+  background-color: #87D3E0;
+}
+
+ul.social-list li a.skype:hover {
+  background-color: #36C4F3
+}
+
+ul.social-list li a i {
+  font-size: 1em;
+  display: block;
+  width: 34px;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  border-left: 1px solid #f2f2f2;
+}
+
+ul.social-list li:last-child a i {
+  border-right: 1px solid #f2f2f2;
+}
+
+
+/*
+  .super-title,.post-title:hover{
+    color:#3498db;
+    text-decoration: none;
+    font-weight:bold;
+  }
+
+
+  .post-title,.post-title:hover{
+    color:yellow;
+    text-decoration: none;
+    font-weight:bold;
+    -webkit-text-stroke: 2px black;
+    -moz-text-stroke: 2px black;
+    -o-text-stroke: 2px black;
+    text-stroke: 2px black;
+  }
+  .extra-title,.extra-title:hover{
+    color:blue;
+    text-decoration: none;
+    font-weight:bold;
+    -webkit-text-stroke: 2px black;
+    -moz-text-stroke: 2px black;
+    -o-text-stroke: 2px black;
+    text-stroke: 2px black;
+  }
+  .sub-title,.sub-title:hover{
+    color:orange;
+    text-decoration: none;
+    font-weight:bold;
+    -webkit-text-stroke: 2px black;
+    -moz-text-stroke: 2px black;
+    -o-text-stroke: 2px black;
+    text-stroke: 2px black;
+  }
+
+  .box.box-one {
+    border: 2px orange solid;
+  }
+  .box {
+
+  }
+  .box.box-one .box-title{
+    padding:10px;
+    background:orange;
+    color:white;
+    font-weight: bold;
+  }
+
+  .box .box-body{
+    padding:10px;
+  }
+*/
+
+
+.carousel-inner {
+  border-radius: 0px;
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 14;
+  padding: 0 0 10px 25px;
+  color: #fff;
+  text-align: left;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  margin: 0;
+  padding: 0 25px 25px 0;
+  text-align: right;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}

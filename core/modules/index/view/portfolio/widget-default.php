@@ -75,10 +75,10 @@ $s = 0;
 
 <?php foreach($images as $i):?>
       <div class="col-md-3 col-xs-3">
-      <h4><a href="./image-<?php echo $i->code; ?>"><?php echo $i->title; ?></a></h4>
+      <h4><a href="./<?php echo $i->getProject()->short_name; ?>"><?php echo $i->getProject()->title; ?></a></h4>
       <br>
       <img src="storage/projects/<?php echo $i->project_id; ?>/<?php echo $i->image; ?>" alt="..." class="img-responsive">
-      <br><p><?php echo $i->description; ?></p>
+      <br><p><?php echo $i->getProject()->description; ?></p>
       </div>
 <?php endforeach; ?>
 

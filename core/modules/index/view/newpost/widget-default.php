@@ -52,6 +52,11 @@
 </div>
   <div class="form-group">
     <div class="col-lg-12">
+      <input type="title" name="video" class="form-control" id="inputEmail1" placeholder="Video">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-12">
       <input type="title" name="tags" class="form-control" id="inputEmail1" placeholder="Etiquetas">
     </div>
   </div>
@@ -80,6 +85,11 @@
 
   <div class="form-group">
     <div class="col-lg-12">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="show_image"> Mostrar Imagen Destacada
+        </label>
+      </div>
       <div class="checkbox">
         <label>
           <input type="checkbox" name="is_public"> Publicar

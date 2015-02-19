@@ -19,6 +19,10 @@ echo		$sql .= "value (\"$this->code\",\"$this->image\",\"$this->title\",\"$this-
 		Executor::doit($sql);
 	}
 
+	public function getProject(){
+		return ProjectData::getById($this->project_id);
+	}
+
 	public static function delById($id){
 		$sql = "delete from ".self::$tablename." where id=$id";
 		Executor::doit($sql);

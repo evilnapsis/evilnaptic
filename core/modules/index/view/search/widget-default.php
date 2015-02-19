@@ -1,125 +1,121 @@
+<?php if(isset($_GET["q"]) && $_GET["q"]!=""):?>
 <?php
 // print_r($_SERVER["PHP_SELF"]);
 // print_r($_SESSION);
+
 $posts = PostData::getPostLike($_GET["q"]);
-$tips = PostData::getTipLike($_GET["q"]);
-$topics = CourseData::getTopicLike($_GET["q"]);
-$howtos = CourseData::getHowToLike($_GET["q"]);
-$courses = CourseData::getCourseLike($_GET["q"]);
-
+$npost = count($posts);
 ?>
-<div style="background:#f0f0f0;margin-top:-21px;">
-<div class="container"><br>
-  <div class="row">
-    <div class="col-md-12">
-    <h2>Evilnapsis HomePage</h2>
-    <p>I <i class="fa fa-heart"></i> Build stuffs.</p>
-    </div>
-</div><br>
-</div>
-</div>
-<br>
+<?php if($npost>0):?>
+<?php
+if($npost%2==0){
+  // numero de posts par
+  $l1 = $npost/2;
+  $l2 = $npost/2;
+}else{
+  // impar
+  $hpost = floor($npost/2);
+  $l1 = $hpost+1;
+  $l2 = $hpost;
+}
+?>
+
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-<h3>Tips</h3>
-    <hr>  
-<?php foreach($tips as $post):?>
-<h3><a class="post-title" href="./index.php?view=post&id=<?php echo $post->id; ?>&kid=<?php echo $post->kind_id; ?>"><?php echo $post->title; ?></a></h3>
-<?php echo $post->brief; ?>
-<?php endforeach; ?>
+        <div class="row">
 
-    </div>
-    <div class="col-md-6">
-<!-- - - - - - - - - - - - - - -->
-<!--
-<div id="carousel-example-generic" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
+            <div class="col-md-10 col-md-offset-1">
+<center>         <h1 align="center" style="font-size:35px;font-weight:bold;width:70%;" class="text-primary">Busqueda [<?php echo $_GET["q"]; ?>]</h1></center>   
+<br>
 
-  <div class="carousel-inner">
-    <div class="item active">
-      <img src="imgs/slides/01.png" alt="...">
-      <div class="carousel-caption">
-        Sistema de encuestas
-      </div>
-    </div>
-
-  </div>
-
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="icon-next"></span>
-  </a>
-</div>
--->
-<!-- - - - - - - - - - - - - - -->
-<?php foreach($posts as $post):?>
+    <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+<?php $cnt=0;?>
+            <div class="col-md-6">
+<?php for($i=0;$i<$l1;$i++):
+$p = $posts[$cnt];
+?>
 <div class="row">
-<?php if($post->image!=""):?>
+<?php if($p->image!=""&& file_exists("storage/images/$p->image")):?>
 <div class="col-md-3">
 
-    <img src="<?php echo "storage/images/$post->image";?>" class="img-responsive"/>
+    <img src="<?php echo "storage/images/$p->image";?>" class="img-responsive"/>
 
 </div>
 <?php endif; ?>
-<div class="<?php if($post->image!=""){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
-<h2 style="margin:0;"><a class="post-title" href="./index.php?view=post&id=<?php echo $post->id; ?>&kid=<?php echo $post->kind_id; ?>&t=<?php echo strtolower( str_replace(" ", "-", $post->title) ); ?>"><?php echo $post->title; ?></a></h2>
-<?php echo $post->brief; ?>
+<div class="<?php if($post->image!=""&& file_exists("storage/images/$p->image")){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
+            <h4><a href="./p-<?php echo $p->code;?>"><?php echo $p->title;?></a></h4>
+            <p class="text-muted"><?php echo date("d/M/Y",strtotime($p->created_at));?> - <a href="./blog/category-inflask"><?php echo $p->getCat()->name;?></a> </p>
 </div>
 </div>
-<hr style="">
-<?php endforeach; ?>
+<hr>
+          <?php $cnt++;
+endfor; ?>
+            </div>
+            <div class="col-md-6">
+<?php for($i=0;$i<$l2;$i++):
+$p = $posts[$cnt];
+?>
+<div class="row">
+<?php if($p->image!=""&& file_exists("storage/images/$p->image")):?>
+<div class="col-md-3">
+
+    <img src="<?php echo "storage/images/$p->image";?>" class="img-responsive"/>
+
+</div>
+<?php endif; ?>
+<div class="<?php if($post->image!=""&& file_exists("storage/images/$p->image")){ echo "col-md-9";}else{ echo "col-md-12"; } ?>">
+            <h4><a href="./p-<?php echo $p->code;?>"><?php echo $p->title;?></a></h4>
+            <p class="text-muted"><?php echo date("d/M/Y",strtotime($p->created_at));?> - <a href="./blog/category-inflask"><?php echo $p->getCat()->name;?></a> </p>
+</div>
+</div>
+<hr>
+          <?php $cnt++;
+endfor; ?>
+
+            </div>
+    </div>
+            </div>
 
     </div>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <div class="col-md-3">
- <div class="box box-one"> 
- <div class="box-title">Cursos y Tutoriales</div>
-<div class="box-body">
-<?php if(count($topics)>0):?>
-<?php foreach($topics as $topic):?>
-    <h3><a class="sub-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h3>
 
-    <p class="list-group-item-text"><?php echo $topic->description; ?></p>
 
-<hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<?php if(count($howtos)>0):?>
-<h3>Tutoriales</h3>
-<hr>
-<?php foreach($howtos as $topic):?>
-   <h3><a class="sub-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h3>
-
-    <p class="list-group-item-text"><?php echo $topic->description; ?></p>
-
-<hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<?php if(count($courses)>0):?>
-<?php foreach($courses as $topic):?>
-   <h3><a class="sub-title" href="index.php?view=takecourse&course_id=<?php echo $topic->id; ?>"><?php echo $topic->name; ?></a></h3>
-
-    <p class="list-group-item-text"><?php echo $topic->description; ?></p>
-
-<hr>
-<?php endforeach; ?>
-
-<?php endif; ?>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-</div>
-</div>
-
+            </div>
     </div>
-  </div>
-
 </div>
+<?php else:?>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+<br><br><br>
+    <h1 style="width:75%;font-size:50px;">No hay resultados</h1>
+    <p class="lead">Su busqueda [<?php echo $_GET["q"]?>] no genero ningun resultado, por favor intente de nuevo con otro termino.</p>
+    <a href="./" class="btn btn-primary">Ir al inicio</a>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+</div>
+</div>
+</div>
+
+<?php endif; ?>
+<?php else:?>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+<br><br><br>
+    <h1 style="width:75%;font-size:50px;">Busqueda vacia</h1>
+    <p class="lead">No se puede procesar una peticion de busqueda varia</p>
+    <a href="./" class="btn btn-primary">Ir al inicio</a>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+</div>
+</div>
+</div>
+
+<?php endif;?>

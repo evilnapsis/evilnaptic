@@ -6,7 +6,15 @@ $post = PostData::getById($_GET["post_id"]);
 
   <div class="row">
     <div class="col-md-12">
-    <h2><?php echo $post->title; ?></h2>
+    <div class="btn-toolbar pull-right">
+    <div class="btn-group">
+    <a class="btn btn-default" href="">Galeria</a>
+    </div>
+    <div class="btn-group">
+    <a class="btn btn-default" href="./p-<?php echo $post->code; ?>">Ver articulo</a>
+    </div>
+</div>
+    <h2><?php echo $post->title; ?> </h2>
 <hr>
 </div>
 </div>
@@ -40,6 +48,12 @@ $post = PostData::getById($_GET["post_id"]);
     </div>
 </div>
 <?php endif; ?>
+  <div class="form-group">
+    <div class="col-lg-12">
+      <input type="title" name="video" value="<?php echo $post->video; ?>" class="form-control" id="inputEmail1" placeholder="Video">
+    </div>
+  </div>
+
   <div class="form-group">
     <div class="col-lg-12">
       <input type="title" name="tags" class="form-control" id="inputEmail1" placeholder="Etiquetas">
@@ -78,6 +92,9 @@ foreach ($tags as $tag) {
   <div class="form-group">
     <div class="col-lg-12">
       <div class="checkbox">
+        <label>
+          <input type="checkbox" name="show_image" <?php if($post->show_image){ echo "checked";}?>> Mostrar Imagen Destacada
+        </label><br>
         <label>
           <input type="checkbox" name="is_public" <?php if($post->is_public){ echo "checked";}?>> Publicar
         </label><br>
